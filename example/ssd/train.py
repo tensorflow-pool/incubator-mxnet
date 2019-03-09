@@ -19,8 +19,10 @@
 # under the License.
 
 import argparse
-import mxnet as mx
 import os
+
+import mxnet as mx
+
 from train.train_net import train_net
 
 
@@ -40,10 +42,11 @@ def parse_args():
                         help='training batch size')
     parser.add_argument('--resume', dest='resume', type=int, default=-1,
                         help='resume training from epoch n')
-    parser.add_argument('--finetune', dest='finetune', type=int, default=-1,
+    parser.add_argument('--finetune', dest='finetune', type=int, default=1,
                         help='finetune from epoch n, rename the model before doing this')
     parser.add_argument('--pretrained', dest='pretrained', help='pretrained model prefix',
-                        default=os.path.join(os.getcwd(), 'model', 'vgg16_reduced'), type=str)
+                        # default=os.path.join(os.getcwd(), 'model', 'vgg16_reduced'), type=str)
+                        default="", type=str)
     parser.add_argument('--epoch', dest='epoch', help='epoch of pretrained model',
                         default=1, type=int)
     parser.add_argument('--prefix', dest='prefix', help='new model prefix',
@@ -80,7 +83,7 @@ def parse_args():
                         help='freeze layer pattern')
     parser.add_argument('--log', dest='log_file', type=str, default="train.log",
                         help='save training log to file')
-    parser.add_argument('--monitor', dest='monitor', type=int, default=0,
+    parser.add_argument('--monitor', dest='monitor', type=int, default=100,
                         help='log network parameters every N iters if larger than 0')
     parser.add_argument('--pattern', dest='monitor_pattern', type=str, default=".*",
                         help='monitor parameter pattern, as regex')
@@ -106,6 +109,7 @@ def parse_args():
     args = parser.parse_args()
     return args
 
+
 def parse_class_names(args):
     """ parse # classes and class_names if applicable """
     num_class = args.num_class
@@ -122,6 +126,7 @@ def parse_class_names(args):
     else:
         class_names = None
     return class_names
+
 
 if __name__ == '__main__':
     args = parse_args()
