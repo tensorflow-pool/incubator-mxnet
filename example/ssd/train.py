@@ -40,7 +40,7 @@ def parse_args():
                         help='which network to use')
     parser.add_argument('--batch-size', dest='batch_size', type=int, default=32,
                         help='training batch size')
-    parser.add_argument('--resume', dest='resume', type=int, default=-1,
+    parser.add_argument('--resume', dest='resume', type=int, default=53,
                         help='resume training from epoch n')
     parser.add_argument('--finetune', dest='finetune', type=int, default=-1,
                         help='finetune from epoch n, rename the model before doing this')
@@ -78,11 +78,12 @@ def parse_args():
                         help='refactor learning rate at specified epochs')
     parser.add_argument('--lr-factor', dest='lr_refactor_ratio', type=float, default=0.1,
                         help='ratio to refactor learning rate')
-    parser.add_argument('--freeze', dest='freeze_pattern', type=str, default="^(conv1_|conv2_).*",
+    # parser.add_argument('--freeze', dest='freeze_pattern', type=str, default="^(conv1_|conv2_).*",
+    parser.add_argument('--freeze', dest='freeze_pattern', type=str, default="",
                         help='freeze layer pattern')
     parser.add_argument('--log', dest='log_file', type=str, default="train.log",
                         help='save training log to file')
-    parser.add_argument('--monitor', dest='monitor', type=int, default=100,
+    parser.add_argument('--monitor', dest='monitor', type=int, default=500,
                         help='log network parameters every N iters if larger than 0')
     parser.add_argument('--pattern', dest='monitor_pattern', type=str, default=".*",
                         help='monitor parameter pattern, as regex')

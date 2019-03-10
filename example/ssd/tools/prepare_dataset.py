@@ -106,7 +106,7 @@ def parse_args():
     parser.add_argument('--set', dest='set', help='train, val, trainval, test',
                         default='trainval', type=str)
     parser.add_argument('--target', dest='target', help='output list file',
-                        default=os.path.join(curr_path, '..', 'train.lst'),
+                        default=os.path.join(curr_path, '..', "data1", 'train.lst'),
                         type=str)
     parser.add_argument('--root', dest='root_path', help='dataset root path',
                         # default=os.path.join(curr_path, '..', 'data', 'VOCdevkit'),
@@ -123,16 +123,16 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-    if args.dataset == 'pascal':
-        db = load_pascal(args.set, args.year, args.root_path, args.shuffle)
-        print("saving list to disk...")
-        db.save_imglist(args.target, root=args.root_path)
-    elif args.dataset == 'coco':
-        db = load_coco(args.set, args.root_path, args.shuffle)
-        print("saving list to disk...")
-        db.save_imglist(args.target, root=args.root_path)
-    else:
-        raise NotImplementedError("No implementation for dataset: " + args.dataset)
+    # if args.dataset == 'pascal':
+    #     db = load_pascal(args.set, args.year, args.root_path, args.shuffle)
+    #     print("saving list to disk...")
+    #     db.save_imglist(args.target, root=args.root_path)
+    # elif args.dataset == 'coco':
+    #     db = load_coco(args.set, args.root_path, args.shuffle)
+    #     print("saving list to disk...")
+    #     db.save_imglist(args.target, root=args.root_path)
+    # else:
+    #     raise NotImplementedError("No implementation for dataset: " + args.dataset)
 
     print("List file {} generated...".format(args.target))
 
@@ -145,6 +145,6 @@ if __name__ == '__main__':
         cmd_arguments.append("--no-shuffle")
 
     print("call {} ".format(cmd_arguments))
-    subprocess.check_call(cmd_arguments)
+    # subprocess.check_call(cmd_arguments)
 
     print("Record file {} generated...".format(args.target.split('.')[0] + '.rec'))
