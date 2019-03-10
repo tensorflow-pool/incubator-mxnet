@@ -42,7 +42,7 @@ def parse_args():
                         help='training batch size')
     parser.add_argument('--resume', dest='resume', type=int, default=-1,
                         help='resume training from epoch n')
-    parser.add_argument('--finetune', dest='finetune', type=int, default=1,
+    parser.add_argument('--finetune', dest='finetune', type=int, default=-1,
                         help='finetune from epoch n, rename the model before doing this')
     parser.add_argument('--pretrained', dest='pretrained', help='pretrained model prefix',
                         default=os.path.join(os.getcwd(), 'model', 'vgg16_reduced'), type=str)
